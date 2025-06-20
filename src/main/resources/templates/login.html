@@ -9,19 +9,19 @@
 <body class="d-flex justify-content-center align-items-center vh-100 bg-light">
 <div class="card shadow-sm p-4" style="width: 100%; max-width: 400px;">
     <h2 class="text-center mb-4">Login</h2>
-    <form method="post">
+    <form method="post" th:object="${loginDTO}">
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" th:field="*{email}">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" th:field="*{password}">
         </div>
         <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">Sign In</button>
             <a href="/" class="btn btn-primary">Back</a>
-            <div th:if="${error != null}" th:text="${error}" class="alert alert-danger" role="alert"></div>
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
         </div>
         <div class="text-center mt-3">
             <a href="register" class="text-decoration-none">Don't have an account? Register here!</a>
