@@ -11,7 +11,6 @@ public class LoginDTO {
     private String email;
 
     @NotBlank(message = "Password cannot be empty")
-    @Size(min = 6, max = 250, message = "The passwords must have between 6 and 250 characters")
     private String password;
 
     public String getEmail() {
