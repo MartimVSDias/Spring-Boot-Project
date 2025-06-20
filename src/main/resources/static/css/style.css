@@ -1,0 +1,14 @@
+.error-box {
+    position: absolute;
+    top: calc(50% - 280px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+    padding: 0 1rem;
+}
+.error-box .alert {
+    max-width: 400px;
+    width: 100%;
+}
+

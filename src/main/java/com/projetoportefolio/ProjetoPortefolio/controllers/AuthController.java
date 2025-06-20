@@ -4,6 +4,7 @@ package com.projetoportefolio.ProjetoPortefolio.controllers;
 import com.projetoportefolio.ProjetoPortefolio.DTO.LoginDTO;
 import com.projetoportefolio.ProjetoPortefolio.DTO.RegisterDTO;
 import com.projetoportefolio.ProjetoPortefolio.Repository.UserRepository;
+import com.projetoportefolio.ProjetoPortefolio.Services.RegisterService;
 import com.projetoportefolio.ProjetoPortefolio.models.User;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -18,6 +19,9 @@ public class AuthController {
 
     @Autowired
     private UserRepository u;
+
+    @Autowired
+    private RegisterService registerService;
 
 
     @GetMapping("/")
@@ -40,8 +44,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public String loginUser(@Valid @ModelAttribute("loginDTO") LoginDTO loginDTO,  BindingResult bindingResult, Model model, HttpServletResponse response) {
-        System.out.println("Email" + loginDTO.getEmail());
-        System.out.println("Password" + loginDTO.getPassword());
+        System.out.println("Email: " + loginDTO.getEmail());
+        System.out.println("Password: " + loginDTO.getPassword());
 
         User foundUser = this.u.login(loginDTO.getEmail(), loginDTO.getPassword());
         if(foundUser != null) {
@@ -52,30 +56,15 @@ public class AuthController {
     }
 
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @PostMapping("/register")
     public String registerUser(@Valid @ModelAttribute("registerDTO") RegisterDTO registerDTO, BindingResult bindingResult, Model model) {
+        registerService.registerUser(registerDTO, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "register";
         }
 
-        if (!registerDTO.getPassword().equals(registerDTO.getConfirmPassword())) {
-            bindingResult.rejectValue("password", "error.registerDTO", "Passwords do not match!");
-            bindingResult.rejectValue("confirmPassword", "error.registerDTO", "Passwords do not match!");
-            return "register";
-        }
-
-        User user = new User();
-
-        user.setName(registerDTO.getName());
-        user.setEmail(registerDTO.getEmail());
-        user.setPassword(registerDTO.getPassword());
-        user.setPhoneNumber(registerDTO.getPhoneNumber());
-
-        u.save(user);
-
         return "redirect:/login";
     }
-
 
 }

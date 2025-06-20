@@ -23,7 +23,7 @@
         <div class="mb-3">
             <label for="phoneNumber" class="form-label">Phone Number</label>
             <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number"  th:field="*{phoneNumber}" th:classappend="${#fields.hasErrors('phoneNumber')} ? 'is-invalid'">
-            <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="invalid-feedback"></div>
+            <div th:if="${#fields.hasErrors('phoneNumber')}" class="invalid-feedback"></div>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>

@@ -1,11 +1,15 @@
 package com.projetoportefolio.ProjetoPortefolio.DTO;
 
+import jakarta.persistence.Column;
+import jakarta.validation.GroupSequence;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class RegisterDTO {
+
+
 
 
     @NotBlank(message = "Name cannot be empty")
@@ -23,6 +27,7 @@ public class RegisterDTO {
     @NotBlank(message = "Confirm Password cannot be empty")
     private String confirmPassword;
 
+    @NotBlank(message = "PhoneNumber cannot be empty")
     @Pattern(regexp = "^\\d{9}$", message="The PhoneNumber must have 9 digits")
     private String phoneNumber;
 
